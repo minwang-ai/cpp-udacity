@@ -22,6 +22,12 @@ enum class State {kEmpty, kObstacle, kClosed, kPath, kStart, kFinish};
 constexpr int delta[4][2]{{-1, 0}, {0, -1}, {1, 0}, {0, 1}};
 
 struct Node {
+  /*
+  Node struct to represent a cell in the grid
+  x,y : coordinates of the cell
+  g: cost from start
+  h: heuristic value to the goal
+  */
     int x;
     int y;
     int g;
@@ -85,8 +91,8 @@ bool Compare(const Node& node_1, const Node& node_2){
   /*
   Compare two nodes based on their f values, f = g + h
 
-  param: node_1: vector of ints {x, y, g, h}, node 1
-         node_2: vector of ints {x, y, g, h}, node 2
+  param: node_1: Node struct, representing the first node
+         node_2: Node struct, representing the second node
   */
 
   int f1 = node_1.g + node_1.h;
@@ -97,9 +103,9 @@ bool Compare(const Node& node_1, const Node& node_2){
 
 void CellSort(vector<Node>& v) {
   /**
-  Sort the two-dimensional vector of ints in descending order.
+  Sort the open list of nodes based on the f value
  
-  param: v: 2D vector of ints, representing the open list
+  param: v: vector of Node structs
   */
   sort(v.begin(), v.end(), Compare);
 }
@@ -150,7 +156,7 @@ void ExpandNeighbors(const Node& current, const array<int, 2>& goal, vector<Node
   /** 
   Add a node to the open list and mark it as open. 
 
-  param current: Node struct, representing the current node
+  param  current: Node struct, representing the current node
          goal: int array, representing the goal node
          open_nodes: vector of Node structs representing open nodes
          grid: the current state of the grid
@@ -205,7 +211,7 @@ auto Search(vector<vector<State>>& grid, const array<int, 2>& init, const array<
       // set the goal grid cell to kFinish before returning the grid. 
       grid[init[0]][init[1]] = State::kStart;
       grid[goal[0]][goal[1]] = State::kFinish;
-      return std::move(grid);
+      return grid;
     }
     
     // If we're not done, expand search to current node's neighbors.
