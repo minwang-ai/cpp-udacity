@@ -52,7 +52,7 @@ struct Node {
  * It converts these values into State enum values.
  * 
  * @param line string: A string representing a line of the board file.
- * @return vector<State> A vector where each element is either State::kEmpty or State::kObstacle.
+ * @return vector<State>: A vector where each element is either State::kEmpty or State::kObstacle.
  */
 auto ParseLine(const string& line) -> vector<State> {
     istringstream sline(line);
@@ -75,7 +75,7 @@ auto ParseLine(const string& line) -> vector<State> {
  * @brief Reads the board file line by line and converts it to a 2D vector of State enums.
  * 
  * @param path string: Path to the board file.
- * @return vector<vector<State>> A 2D vector representing the grid.
+ * @return vector<vector<State>>: A 2D vector representing the grid.
  * @throws std::runtime_error if the file cannot be opened.
  */
 auto ReadBoardFile(string path) -> vector<vector<State>> {
@@ -100,7 +100,7 @@ auto ReadBoardFile(string path) -> vector<vector<State>> {
  * 
  * @param node_1 const Node&: The first node.
  * @param node_2 const Node&: The second node.
- * @return bool True if f1 > f2, otherwise false.
+ * @return bool: True if f1 > f2, otherwise false.
  */
 bool Compare(const Node& node_1, const Node& node_2){
   int f1 = node_1.g + node_1.h;
@@ -137,7 +137,7 @@ auto Heuristic (const int x1, const int y1, const int x2, const int y2) -> int {
  * @param x int: The x-coordinate of the cell.
  * @param y int: The y-coordinate of the cell.
  * @param grid vector<vector<State>>&: The 2D vector representing the board.
- * @return bool True if the cell is valid, false otherwise.
+ * @return bool: True if the cell is valid, false otherwise.
  */
 bool CheckValidCell(const int x, const int y, vector<vector<State>>& grid){
   bool on_grid_x = (x >= 0 && x < grid.size());
@@ -191,7 +191,7 @@ void ExpandNeighbors(const Node& current, const array<int, 2>& goal, vector<Node
  * @param grid vector<vector<State>>&: The 2D vector representing the grid.
  * @param init const array<int, 2>&: The starting node's coordinates.
  * @param goal const array<int, 2>&: The goal node's coordinates.
- * @return vector<vector<State>> The modified grid with the path from start to goal.
+ * @return vector<vector<State>>: The modified grid with the path from start to goal.
  */
 auto Search(vector<vector<State>>& grid, const array<int, 2>& init, const array<int, 2>& goal) -> vector<vector<State>> {
   // Create the vector of open nodes.
@@ -235,7 +235,7 @@ auto Search(vector<vector<State>>& grid, const array<int, 2>& init, const array<
  * @brief Translate a State enum value to a string representation.
  * 
  * @param cell const State&: The cell's state as a State enum.
- * @return string A string representation of the state (e.g., "0" for empty cell, "⛰️" for obstacle).
+ * @return string: A string representation of the state (e.g., "0" for empty cell, "⛰️" for obstacle).
  */
 string CellString(const State& cell) {
   switch(cell) {
@@ -251,7 +251,7 @@ string CellString(const State& cell) {
  * @brief Translate a State enum value to a string representation.
  * 
  * @param cell const State&: The cell's state as a State enum.
- * @return string A string representation of the state (e.g., "0" for empty cell, "⛰️" for obstacle).
+ * @return string: A string representation of the state (e.g., "0" for empty cell, "⛰️" for obstacle).
  */
 void PrintBoard (const vector<vector<State>>& board){
   for (const auto& row: board){
